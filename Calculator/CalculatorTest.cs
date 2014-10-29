@@ -19,7 +19,8 @@ namespace CalculatorTest
         [Test]
         public void AddTwo_Numbers()
         {
-            var calculator = new Calculator();
+            var _memory = new StoreSingleNumber();
+            var calculator = new Calculator(_memory);
             var firstNumber = 3;
             var secondNumber = 4;
             calculator.EnterNumber(firstNumber);
@@ -32,7 +33,8 @@ namespace CalculatorTest
         [Test]
         public void Store_Retrieve_FromMemory()
         {
-            var calculator = new Calculator();
+            var _memory = new StoreSingleNumber();
+            var calculator = new Calculator(_memory);
             var expectedNumber = 10;
             calculator.EnterNumber(expectedNumber);
             calculator.MemPlus();
