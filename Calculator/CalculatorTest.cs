@@ -111,5 +111,30 @@ namespace CalculatorTest
 
             Assert.That(result,Is.EqualTo(14));
         }
+
+        [Test]
+        public void Add_AddsMultipleNumbersFromMemory()
+        {
+            var _memory = new StoreMulitpleNumbersMemory();
+            var calculator = new Calculator(_memory);
+            var firstNumber = 3;
+            var secondNumber = 4;
+            var thirdNumber = 5;
+
+            calculator.EnterNumber(firstNumber);
+            calculator.Add();
+            calculator.EnterNumber(secondNumber);
+            calculator.Equals();
+            calculator.MemPlus();
+
+            calculator.EnterNumber(thirdNumber);
+            calculator.MemPlus();
+
+            calculator.MemRetrieve();
+            calculator.Add();
+            calculator.MemRetrieve();
+            var result = calculator.Equals();
+            Assert.That(result, Is.EqualTo(12));
+        }
     }
 }
