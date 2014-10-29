@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CalculatorLib;
 using NUnit.Framework;
 
 namespace CalculatorTest
@@ -10,6 +9,13 @@ namespace CalculatorTest
     [TestFixture]
     public class CalculatorTest
     {
+        
+        [Test]
+        public void MultiplyTwoNumbers()
+        {
+            
+        }
+        
         [Test]
         public void AddTwo_Numbers()
         {
@@ -22,32 +28,17 @@ namespace CalculatorTest
             var result = calculator.Equals();
             Assert.That(result, Is.EqualTo(7));
         }
-    }
 
-    public class Calculator
-    {
-        List<string> input = new List<string>();
-        public void EnterNumber(int number)
+        [Test]
+        public void Store_Retrieve_FromMemory()
         {
-            input.Add(number.ToString());
-        }
+            var calculator = new Calculator();
+            var expectedNumber = 10;
+            calculator.EnterNumber(expectedNumber);
+            calculator.MemPlus();
+            var result = calculator.MemRetrieve();
 
-        public void Add()
-        {
-            input.Add("+");
-        }
-
-        internal int Equals()
-        {
-            var operand1 = int.Parse(input[0]);
-            var oper = input[1];
-            var operand2 = int.Parse(input[2]);
-
-            int result = 0;
-            if (oper == "+")
-                return operand1 + operand2;
-
-            return result;
+            Assert.That(result,Is.EqualTo(expectedNumber));
         }
     }
 }
