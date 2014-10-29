@@ -6,6 +6,19 @@ using NUnit.Framework;
 
 namespace CalculatorTest
 {
+    public class FakeMemory : ICalculatorMemory
+    {
+        public int FakeValueToReturn { get; set; }
+        public void MemPlus(int number)
+        {
+            FakeValueToReturn = number;
+        }
+
+        public int MemRetrieve()
+        {
+            return FakeValueToReturn;
+        }
+    }
     [TestFixture]
     public class CalculatorTest
     {
@@ -43,14 +56,20 @@ namespace CalculatorTest
         [Test]
         public void Store_Retrieve_FromMemory()
         {
-            var _memory = new StoreSingleNumber();
+            var _memory = new FakeMemory();
+            
             var calculator = new Calculator(_memory);
+            
             var expectedNumber = 10;
+
             calculator.EnterNumber(expectedNumber);
             calculator.MemPlus();
+
+            _memory.FakeValueToReturn = 99;
+
             var result = calculator.MemRetrieve();
 
-            Assert.That(result,Is.EqualTo(expectedNumber));
+            Assert.That(result,Is.EqualTo(99));
         }      
   
         [Test]
