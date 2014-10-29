@@ -51,6 +51,46 @@ namespace CalculatorTest
             var result = calculator.MemRetrieve();
 
             Assert.That(result,Is.EqualTo(expectedNumber));
-        }        
+        }      
+  
+        [Test]
+        public void Add_AddsNumberFromMemory()
+        {
+            var _memory = new StoreSingleNumber();
+            var calculator = new Calculator(_memory);
+            var firstNumber = 3;
+            var secondNumber = 4;
+            
+            calculator.EnterNumber(firstNumber);
+            calculator.MemPlus();
+            calculator.EnterNumber(secondNumber);
+            calculator.Add();
+            calculator.MemRetrieve();
+            var result = calculator.Equals();
+            Assert.That(result, Is.EqualTo(7));
+        }
+
+        [Test]
+        public void Add_Multiply_From_Memory()
+        {
+            var _memory = new StoreSingleNumber();
+            var calculator = new Calculator(_memory);
+            var firstNumber = 3;
+            var secondNumber = 4;
+            var numberForMultiply = 2;
+            calculator.EnterNumber(firstNumber);
+            calculator.Add();
+            calculator.EnterNumber(secondNumber);
+            calculator.Equals();
+
+            calculator.MemPlus();
+            calculator.EnterNumber(numberForMultiply);
+            calculator.Multiply();
+            calculator.MemRetrieve();
+
+            var result = calculator.Equals();
+
+            Assert.That(result,Is.EqualTo(14));
+        }
     }
 }
