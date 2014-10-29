@@ -13,7 +13,17 @@ namespace CalculatorTest
         [Test]
         public void MultiplyTwoNumbers()
         {
+            var _memory = new StoreSingleNumber();
+            var calculator = new Calculator(_memory);
+            var firstNumber = 3;
+            var secondNumber = 4;
+            calculator.EnterNumber(firstNumber);
+            calculator.Multiply();
+            calculator.EnterNumber(secondNumber);
+
+            var result = calculator.Equals();
             
+            Assert.That(result,Is.EqualTo(12));
         }
         
         [Test]
@@ -41,6 +51,6 @@ namespace CalculatorTest
             var result = calculator.MemRetrieve();
 
             Assert.That(result,Is.EqualTo(expectedNumber));
-        }
+        }        
     }
 }
